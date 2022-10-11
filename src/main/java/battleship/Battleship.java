@@ -1,33 +1,27 @@
 package battleship;
 
+import java.util.List;
+
 public class Battleship {
-    private Battleground battleground;
     private Player P1;
     private Player P2;
 
     public Battleship(int battlegroundSize,
                       int numOfShips,
                       int numOfMissiles,
-                      int[][] P1ShipPositions,
-                      int[][] P2ShipPositions) {
-        this.battleground = new Battleground(battlegroundSize);
+                      List<int[]> P1ShipPositions,
+                      List<int[]> P2ShipPositions) {
         this.P1 = new Player(
-                this,
+                new Battleground(battlegroundSize),
                 numOfShips,
                 numOfMissiles,
                 P1ShipPositions
         );
-        this.P1 = new Player(
-                this,
+        this.P2 = new Player(
+                new Battleground(battlegroundSize),
                 numOfShips,
                 numOfMissiles,
                 P2ShipPositions
         );
-
-
-    }
-
-    protected int getBattlegroundSize() {
-        return battleground.getBattlegroundSize();
     }
 }

@@ -2,19 +2,20 @@ package battleship;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PlayerPropertyValidator {
     private int battlegroundSize;
     private int numOfShips;
     private int numOfMissiles;
-    private int[][] shipPositions;
+    private List<int[]> shipPositions;
 
     public PlayerPropertyValidator(
             int battlegroundSize,
             int numOfShips,
             int numOfMissiles,
-            int[][] shipPositions) {
+            List<int[]> shipPositions) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.numOfMissiles = numOfMissiles;
@@ -50,16 +51,16 @@ public class PlayerPropertyValidator {
         validateShipPositionsInsideBattleground(shipPositions);
     }
 
-    private void validateShipPositionsToNumOfShips(int[][] shipPositions) {
-        Set<int[]> shipPositionsSet = new HashSet<>(Arrays.asList(shipPositions));
+    private void validateShipPositionsToNumOfShips(List<int[]> shipPositions) {
+        Set<int[]> shipPositionsSet = new HashSet<>(shipPositions);
         if (shipPositionsSet.size() != numOfShips) {
             throw new IllegalArgumentException("P1 and P2 shipPositions must align with numOfShips and no duplicate ships.");
         }
     }
 
-    private void validateShipPositionsInsideBattleground(int[][] shipPositions) {
+    private void validateShipPositionsInsideBattleground(List<int[]> shipPositions) {
         for (int i = 0; i < numOfShips; i++) {
-            validateCoordinateIsInsideBattleground(shipPositions[i]);
+            validateCoordinateIsInsideBattleground(shipPositions.get(i));
         }
     }
 
