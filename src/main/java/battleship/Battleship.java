@@ -14,18 +14,19 @@ public class Battleship {
 
         this.P1 = new Player(numOfMissiles);
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 P1ShipPositions);
+
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
 
         this.P2 = new Player(numOfMissiles);
         Battleground battlegroundP2 = new Battleground(
-                P2,
                 battlegroundSize,
                 numOfShips,
                 P2ShipPositions);
+        battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
     }
 }

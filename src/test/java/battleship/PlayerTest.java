@@ -22,17 +22,17 @@ class PlayerTest {
         shipPositions.add(new int[] {0,3});
         shipPositions.add(new int[] {0,4});
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
         Battleground battlegroundP2 = new Battleground(
-                P2,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
+        battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
         int[] attackCoordinate = {0,1};
@@ -54,17 +54,17 @@ class PlayerTest {
         shipPositions.add(new int[] {0,3});
         shipPositions.add(new int[] {0,4});
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
         Battleground battlegroundP2 = new Battleground(
-                P2,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
+        battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
         int[] attackCoordinate = {0,1};
@@ -87,17 +87,17 @@ class PlayerTest {
         shipPositions.add(new int[] {0,3});
         shipPositions.add(new int[] {0,4});
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
         Battleground battlegroundP2 = new Battleground(
-                P2,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
+        battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
         int[] attackCoordinateOne = {0,1};

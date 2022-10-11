@@ -22,11 +22,11 @@ class BattlegroundTest {
         shipPositions.add(new int[] {0,3});
         shipPositions.add(new int[] {0,4});
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
 
         int[] attackCoordinate = {1,0};
@@ -48,11 +48,11 @@ class BattlegroundTest {
         shipPositions.add(new int[] {0,3});
         shipPositions.add(new int[] {0,4});
         Battleground battlegroundP1 = new Battleground(
-                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
 
         int[] attackCoordinate = {0,1};

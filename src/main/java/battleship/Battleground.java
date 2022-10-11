@@ -13,20 +13,22 @@ public class Battleground {
     private Set<int[]> failedAttacks = new HashSet<int[]>();
 
     public Battleground(
-            Player player,
             int battlegroundSize,
             int numOfShips,
             Set<int[]> shipPositions) {
-        this.player = player;
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
 
         BattlegroundPropertyValidator propertyValidator = new BattlegroundPropertyValidator(
-                battlegroundSize,
-                numOfShips,
-                shipPositions);
+                this.battlegroundSize,
+                this.numOfShips,
+                this.shipPositions);
         propertyValidator.validateBattlegroundProperties();
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public Set<int[]> getSuccessfulAttacks() {
