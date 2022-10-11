@@ -11,40 +11,54 @@ import static org.junit.jupiter.api.Assertions.*;
 class BattlegroundTest {
     @Test
     public void givenMissedAttackThenAddAttackCoordinateToFailedAttacks() {
-        int battlegroundSize = 4;
-        int numOfShips = 2;
+        int numOfMissiles = 2;
+        Player P1 = new Player(numOfMissiles);
+
+        int battlegroundSize = 5;
+        int numOfShips = 4;
         List<int[]> shipPositions = new ArrayList<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
-
-        Battleground battleground = new Battleground(
+        shipPositions.add(new int[] {0,3});
+        shipPositions.add(new int[] {0,4});
+        Battleground battlegroundP1 = new Battleground(
+                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        P1.setBattleground(battlegroundP1);
+
         int[] attackCoordinate = {1,0};
-        battleground.attacked(attackCoordinate);
-        assertEquals(true,isCoordinateInList(attackCoordinate,battleground.getFailedAttacks()));
-        assertEquals(false,isCoordinateInList(attackCoordinate,battleground.getSuccessfulAttacks()));
+        battlegroundP1.attacked(attackCoordinate);
+        assertEquals(true,isCoordinateInList(attackCoordinate,battlegroundP1.getFailedAttacks()));
+        assertEquals(false,isCoordinateInList(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
     }
 
     @Test
     public void givenSuccessfulAttackThenAddAttackCoordinateToSuccessfulAttacks() {
-        int battlegroundSize = 4;
-        int numOfShips = 2;
+        int numOfMissiles = 2;
+        Player P1 = new Player(numOfMissiles);
+
+        int battlegroundSize = 5;
+        int numOfShips = 4;
         List<int[]> shipPositions = new ArrayList<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
-
-        Battleground battleground = new Battleground(
+        shipPositions.add(new int[] {0,3});
+        shipPositions.add(new int[] {0,4});
+        Battleground battlegroundP1 = new Battleground(
+                P1,
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
 
+        P1.setBattleground(battlegroundP1);
+
         int[] attackCoordinate = {0,1};
-        battleground.attacked(attackCoordinate);
-        assertEquals(false,isCoordinateInList(attackCoordinate,battleground.getFailedAttacks()));
-        assertEquals(true,isCoordinateInList(attackCoordinate,battleground.getSuccessfulAttacks()));
+        battlegroundP1.attacked(attackCoordinate);
+        assertEquals(false,isCoordinateInList(attackCoordinate,battlegroundP1.getFailedAttacks()));
+        assertEquals(true,isCoordinateInList(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
     }
 
     private boolean isCoordinateInList(int[] coordinate, List<int[]> list) {

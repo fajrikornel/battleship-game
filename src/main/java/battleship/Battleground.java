@@ -2,9 +2,11 @@ package battleship;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class Battleground {
+    private Player player;
     private int battlegroundSize;
     private int numOfShips;
     private List<int[]> shipPositions;
@@ -12,9 +14,11 @@ public class Battleground {
     private List<int[]> failedAttacks = new ArrayList<int[]>();
 
     public Battleground(
+            Player player,
             int battlegroundSize,
             int numOfShips,
             List<int[]> shipPositions) {
+        this.player = player;
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
@@ -39,14 +43,25 @@ public class Battleground {
     }
 
     public void attacked(int[] attackCoordinate) {
-        if (isShipCoordinate(attackCoordinate)) {
+        if (isCoordinateInList(attackCoordinate, shipPositions) &&
+                !isCoordinateInList(attackCoordinate, successfulAttacks)) {
             successfulAttacks.add(attackCoordinate);
+            if (isAllShipsDestroyed())
+                updateAliveStatus();
         } else {
             failedAttacks.add(attackCoordinate);
         }
     }
 
-    private boolean isShipCoordinate(int[] coordinate) {
-        return shipPositions.stream().anyMatch(shipPos -> Arrays.equals(shipPos, coordinate));
+    private boolean isCoordinateInList(int[] coordinate, List<int[]> positions) {
+        return positions.stream().anyMatch(pos -> Arrays.equals(pos, coordinate));
+    }
+
+    private boolean isAllShipsDestroyed() {
+        return Arrays.deepEquals(shipPositions.toArray(), successfulAttacks.toArray());
+    }
+
+    protected void updateAliveStatus() {
+        this.player.setAliveStatus(!isAllShipsDestroyed());
     }
 }
