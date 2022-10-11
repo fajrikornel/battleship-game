@@ -1,34 +1,33 @@
 package battleship;
 
 public class Battleship {
-    private int battlegroundSize;
-    private int numOfShips;
-    private int numOfMissiles;
-    private int[][] P1ShipPositions;
-    private int[][] P2ShipPositions;
+    private Battleground battleground;
+    private Player P1;
+    private Player P2;
 
     public Battleship(int battlegroundSize,
                       int numOfShips,
                       int numOfMissiles,
                       int[][] P1ShipPositions,
                       int[][] P2ShipPositions) {
-        this.battlegroundSize = battlegroundSize;
-        this.numOfShips = numOfShips;
-        this.numOfMissiles = numOfMissiles;
-        this.P1ShipPositions = P1ShipPositions;
-        this.P2ShipPositions = P2ShipPositions;
-
-        BattleshipPropertyValidator propertyValidator = new BattleshipPropertyValidator(
-                battlegroundSize,
+        this.battleground = new Battleground(battlegroundSize);
+        this.P1 = new Player(
+                this,
                 numOfShips,
                 numOfMissiles,
-                P1ShipPositions,
+                P1ShipPositions
+        );
+        this.P1 = new Player(
+                this,
+                numOfShips,
+                numOfMissiles,
                 P2ShipPositions
         );
 
-        propertyValidator.validateBattleshipProperties();
+
     }
 
-
-
+    protected int getBattlegroundSize() {
+        return battleground.getBattlegroundSize();
+    }
 }

@@ -4,39 +4,27 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BattleshipPropertyValidator {
+public class PlayerPropertyValidator {
     private int battlegroundSize;
     private int numOfShips;
     private int numOfMissiles;
-    private int[][] P1ShipPositions;
-    private int[][] P2ShipPositions;
+    private int[][] shipPositions;
 
-    public BattleshipPropertyValidator(int battlegroundSize,
-                                       int numOfShips,
-                                       int numOfMissiles,
-                                       int[][] P1ShipPositions,
-                                       int[][] P2ShipPositions) {
+    public PlayerPropertyValidator(
+            int battlegroundSize,
+            int numOfShips,
+            int numOfMissiles,
+            int[][] shipPositions) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.numOfMissiles = numOfMissiles;
-        this.P1ShipPositions = P1ShipPositions;
-        this.P2ShipPositions = P2ShipPositions;
+        this.shipPositions = shipPositions;
     }
 
-    public void validateBattleshipProperties() {
-        validateBattlegroundSizeProperty();
+    public void validatePlayerProperties() {
         validateNumOfShipsProperty();
         validateNumOfMissilesProperty();
         validateShipPositions();
-    }
-
-    private void validateBattlegroundSizeProperty() {
-        int lowerBound = 0;
-        int upperBound = 10;
-
-        if (battlegroundSize <= lowerBound || battlegroundSize >= upperBound) {
-            throw new IllegalArgumentException("Invalid range for Battleground size: Must be in (0..10)");
-        }
     }
 
     private void validateNumOfShipsProperty() {
@@ -58,11 +46,6 @@ public class BattleshipPropertyValidator {
     }
 
     private void validateShipPositions() {
-        validatePlayerShipPositions(P1ShipPositions);
-        validatePlayerShipPositions(P2ShipPositions);
-    }
-
-    private void validatePlayerShipPositions(int[][] shipPositions) {
         validateShipPositionsToNumOfShips(shipPositions);
         validateShipPositionsInsideBattleground(shipPositions);
     }
