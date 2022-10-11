@@ -47,7 +47,7 @@ public class BattlegroundPropertyValidator {
 
     private void validateShipPositionsToNumOfShips() {
         if (shipPositions.size() != numOfShips) {
-            throw new IllegalArgumentException("P1 and P2 shipPositions must align with numOfShips and no duplicate ships.");
+            throw new IllegalArgumentException("shipPositions must align with numOfShips and no duplicate ships.");
         }
     }
 

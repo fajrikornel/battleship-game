@@ -23,7 +23,7 @@ class PlayerPropertyValidatorTest {
         String exceptionUpperBoundMessage = exceptionUpperBound.getMessage();
         String exceptionLowerBoundMessage = exceptionLowerBound.getMessage();
 
-        assertTrue(exceptionUpperBoundMessage.contains("Invalid range for numOfMissiles: Must be in (0..100)"));
-        assertTrue(exceptionLowerBoundMessage.contains("Invalid range for numOfMissiles: Must be in (0..100)"));
+        assertTrue(exceptionUpperBoundMessage.equals("Invalid range for numOfMissiles: Must be in (0..100)"));
+        assertTrue(exceptionLowerBoundMessage.equals("Invalid range for numOfMissiles: Must be in (0..100)"));
     }
 }

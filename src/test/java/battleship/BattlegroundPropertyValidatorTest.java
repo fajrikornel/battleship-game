@@ -28,8 +28,8 @@ class BattlegroundPropertyValidatorTest {
         String exceptionUpperBoundMessage = exceptionUpperBound.getMessage();
         String exceptionLowerBoundMessage = exceptionLowerBound.getMessage();
 
-        assertTrue(exceptionUpperBoundMessage.contains("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
-        assertTrue(exceptionLowerBoundMessage.contains("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
+        assertTrue(exceptionUpperBoundMessage.equals("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
+        assertTrue(exceptionLowerBoundMessage.equals("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
     }
 
     @Test
@@ -52,8 +52,8 @@ class BattlegroundPropertyValidatorTest {
         String exceptionUpperBoundMessage = exceptionUpperBound.getMessage();
         String exceptionLowerBoundMessage = exceptionLowerBound.getMessage();
 
-        assertTrue(exceptionUpperBoundMessage.contains("Invalid range for Battleground size: Must be in (0..10)"));
-        assertTrue(exceptionLowerBoundMessage.contains("Invalid range for Battleground size: Must be in (0..10)"));
+        assertTrue(exceptionUpperBoundMessage.equals("Invalid range for Battleground size: Must be in (0..10)"));
+        assertTrue(exceptionLowerBoundMessage.equals("Invalid range for Battleground size: Must be in (0..10)"));
     }
 
     @Test
@@ -77,8 +77,8 @@ class BattlegroundPropertyValidatorTest {
         String exceptionNumOfShipsMoreMessage = exceptionNumOfShipsMore.getMessage();
         String exceptionNumOfShipsLessMessage = exceptionNumOfShipsLess.getMessage();
 
-        assertTrue(exceptionNumOfShipsMoreMessage.contains("shipPositions must align with numOfShips and no duplicate ships."));
-        assertTrue(exceptionNumOfShipsLessMessage.contains("shipPositions must align with numOfShips and no duplicate ships."));
+        assertTrue(exceptionNumOfShipsMoreMessage.equals("shipPositions must align with numOfShips and no duplicate ships."));
+        assertTrue(exceptionNumOfShipsLessMessage.equals("shipPositions must align with numOfShips and no duplicate ships."));
     }
 
     @Test
@@ -102,8 +102,8 @@ class BattlegroundPropertyValidatorTest {
         String exceptionCoordinateLessThanZeroMessage = exceptionCoordinateLessThanZero.getMessage();
         String exceptionCoordinateMoreThanBattlegroundMessage = exceptionCoordinateMoreThanBattleground.getMessage();
 
-        assertTrue(exceptionCoordinateLessThanZeroMessage.contains("All ships must be inside the battlefield."));
-        assertTrue(exceptionCoordinateMoreThanBattlegroundMessage.contains("All ships must be inside the battlefield."));
+        assertTrue(exceptionCoordinateLessThanZeroMessage.equals("All ships must be inside the battlefield."));
+        assertTrue(exceptionCoordinateMoreThanBattlegroundMessage.equals("All ships must be inside the battlefield."));
     }
 
     private Set<int[]> generateMockShipPositions(int battlegroundSize, int numOfShips) {
