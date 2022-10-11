@@ -9,17 +9,44 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BattlegroundPropertyValidatorTest {
     @Test
+    public void givenNumOfShipsOutOfDefinedRangeThrowError() {
+        int battlegroundSize = 9; //Arbitrary number
+        int numOfShipsUpperBoundTest = battlegroundSize*battlegroundSize/2 + 1;
+        int numOfShipsLowerBoundTest = 0;
+        List<int[]> P1ShipPositionsUpper = generateMockShipPositions(battlegroundSize, numOfShipsUpperBoundTest);
+        List<int[]> P1ShipPositionsLower = generateMockShipPositions(battlegroundSize, numOfShipsLowerBoundTest);
+
+        Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfShipsUpperBoundTest, P1ShipPositionsUpper)
+                        .validateBattlegroundProperties()
+        );
+        Exception exceptionLowerBound = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfShipsLowerBoundTest, P1ShipPositionsLower)
+                        .validateBattlegroundProperties()
+        );
+
+        String exceptionUpperBoundMessage = exceptionUpperBound.getMessage();
+        String exceptionLowerBoundMessage = exceptionLowerBound.getMessage();
+
+        assertTrue(exceptionUpperBoundMessage.contains("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
+        assertTrue(exceptionLowerBoundMessage.contains("Invalid range for numOfShips: Must be in (0..battlegroundSize**2/2]"));
+    }
+
+    @Test
     public void givenBattlegroundSizeOutOfDefinedRangeThrowError() {
         int battlegroundSizeUpperBoundTest = 10;
         int battlegroundSizeLowerBoundTest = 0;
+        int numOfShips = 3;
+        List<int[]> shipPositionsUpperBoundTest = generateMockShipPositions(battlegroundSizeUpperBoundTest, numOfShips);
+        List<int[]> shipPositionsLowerBoundTest = generateMockShipPositions(battlegroundSizeLowerBoundTest, numOfShips);
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSizeUpperBoundTest)
-                        .validateBattlegroundProperty()
+                new BattlegroundPropertyValidator(battlegroundSizeUpperBoundTest, numOfShips, shipPositionsUpperBoundTest)
+                        .validateBattlegroundProperties()
         );
         Exception exceptionLowerBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSizeLowerBoundTest)
-                        .validateBattlegroundProperty()
+                new BattlegroundPropertyValidator(battlegroundSizeLowerBoundTest, numOfShips, shipPositionsLowerBoundTest)
+                        .validateBattlegroundProperties()
         );
 
         String exceptionUpperBoundMessage = exceptionUpperBound.getMessage();
@@ -27,6 +54,56 @@ class BattlegroundPropertyValidatorTest {
 
         assertTrue(exceptionUpperBoundMessage.contains("Invalid range for Battleground size: Must be in (0..10)"));
         assertTrue(exceptionLowerBoundMessage.contains("Invalid range for Battleground size: Must be in (0..10)"));
+    }
+
+    @Test
+    public void givenShipPositionsNotMatchingNumberOfShipsThrowError() {
+        int battlegroundSize = 9; //Arbitrary number
+        int numOfP1AndP2ShipsCorrect = 2; //Arbitrary number
+        int numOfP1ShipsWrong = 1;
+        int numOfP2ShipsWrong = 3;
+        List<int[]> P1ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP1ShipsWrong);
+        List<int[]> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP2ShipsWrong);
+
+        Exception exceptionNumOfShipsMore = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfP1AndP2ShipsCorrect, P1ShipPositionsWrong)
+                        .validateBattlegroundProperties()
+        );
+        Exception exceptionNumOfShipsLess = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfP1AndP2ShipsCorrect, P2ShipPositionsWrong)
+                        .validateBattlegroundProperties()
+        );
+
+        String exceptionNumOfShipsMoreMessage = exceptionNumOfShipsMore.getMessage();
+        String exceptionNumOfShipsLessMessage = exceptionNumOfShipsLess.getMessage();
+
+        assertTrue(exceptionNumOfShipsMoreMessage.contains("shipPositions must align with numOfShips and no duplicate ships."));
+        assertTrue(exceptionNumOfShipsLessMessage.contains("shipPositions must align with numOfShips and no duplicate ships."));
+    }
+
+    @Test
+    public void givenCoordinatesOutOfBattlefieldThrowError() {
+        int battlegroundSize = 9; //Arbitrary number
+        int numOfShips = 2; //Arbitrary number
+        List<int[]> P1ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfShips);
+        P1ShipPositionsWrong.get(0)[0] = -1;
+        List<int[]> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfShips);
+        P2ShipPositionsWrong.get(0)[0] = battlegroundSize;
+
+        Exception exceptionCoordinateLessThanZero = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfShips, P2ShipPositionsWrong)
+                        .validateBattlegroundProperties()
+        );
+        Exception exceptionCoordinateMoreThanBattleground = assertThrows(IllegalArgumentException.class, () ->
+                new BattlegroundPropertyValidator(battlegroundSize, numOfShips, P1ShipPositionsWrong)
+                        .validateBattlegroundProperties()
+        );
+
+        String exceptionCoordinateLessThanZeroMessage = exceptionCoordinateLessThanZero.getMessage();
+        String exceptionCoordinateMoreThanBattlegroundMessage = exceptionCoordinateMoreThanBattleground.getMessage();
+
+        assertTrue(exceptionCoordinateLessThanZeroMessage.contains("All ships must be inside the battlefield."));
+        assertTrue(exceptionCoordinateMoreThanBattlegroundMessage.contains("All ships must be inside the battlefield."));
     }
 
     private List<int[]> generateMockShipPositions(int battlegroundSize, int numOfShips) {

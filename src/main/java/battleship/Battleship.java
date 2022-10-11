@@ -12,16 +12,18 @@ public class Battleship {
                       List<int[]> P1ShipPositions,
                       List<int[]> P2ShipPositions) {
         this.P1 = new Player(
-                new Battleground(battlegroundSize),
-                numOfShips,
-                numOfMissiles,
-                P1ShipPositions
+                new Battleground(
+                        battlegroundSize,
+                        numOfShips,
+                        P1ShipPositions),
+                numOfMissiles
         );
         this.P2 = new Player(
-                new Battleground(battlegroundSize),
-                numOfShips,
-                numOfMissiles,
-                P2ShipPositions
+                new Battleground(
+                        battlegroundSize,
+                        numOfShips,
+                        P2ShipPositions),
+                numOfMissiles
         );
     }
 }
