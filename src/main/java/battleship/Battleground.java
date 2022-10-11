@@ -1,23 +1,22 @@
 package battleship;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 public class Battleground {
     private Player player;
     private int battlegroundSize;
     private int numOfShips;
-    private List<int[]> shipPositions;
-    private List<int[]> successfulAttacks = new ArrayList<int[]>();
-    private List<int[]> failedAttacks = new ArrayList<int[]>();
+    private Set<int[]> shipPositions;
+    private Set<int[]> successfulAttacks = new HashSet<int[]>();
+    private Set<int[]> failedAttacks = new HashSet<int[]>();
 
     public Battleground(
             Player player,
             int battlegroundSize,
             int numOfShips,
-            List<int[]> shipPositions) {
+            Set<int[]> shipPositions) {
         this.player = player;
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
@@ -30,21 +29,16 @@ public class Battleground {
         propertyValidator.validateBattlegroundProperties();
     }
 
-    protected int getBattlegroundSize() {
-        return battlegroundSize;
-    }
-
-    public List<int[]> getSuccessfulAttacks() {
+    public Set<int[]> getSuccessfulAttacks() {
         return successfulAttacks;
     }
 
-    public List<int[]> getFailedAttacks() {
+    public Set<int[]> getFailedAttacks() {
         return failedAttacks;
     }
 
     public void attacked(int[] attackCoordinate) {
-        if (isCoordinateInList(attackCoordinate, shipPositions) &&
-                !isCoordinateInList(attackCoordinate, successfulAttacks)) {
+        if (isCoordinateInSet(attackCoordinate, shipPositions)) {
             successfulAttacks.add(attackCoordinate);
             if (isAllShipsDestroyed())
                 updateAliveStatus();
@@ -53,12 +47,12 @@ public class Battleground {
         }
     }
 
-    private boolean isCoordinateInList(int[] coordinate, List<int[]> positions) {
+    private boolean isCoordinateInSet(int[] coordinate, Set<int[]> positions) {
         return positions.stream().anyMatch(pos -> Arrays.equals(pos, coordinate));
     }
 
     private boolean isAllShipsDestroyed() {
-        return Arrays.deepEquals(shipPositions.toArray(), successfulAttacks.toArray());
+        return shipPositions.size() == successfulAttacks.size();
     }
 
     protected void updateAliveStatus() {

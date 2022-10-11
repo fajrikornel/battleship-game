@@ -2,9 +2,9 @@ package battleship;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +16,7 @@ class BattlegroundTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
         shipPositions.add(new int[] {0,3});
@@ -31,8 +31,8 @@ class BattlegroundTest {
 
         int[] attackCoordinate = {1,0};
         battlegroundP1.attacked(attackCoordinate);
-        assertEquals(true,isCoordinateInList(attackCoordinate,battlegroundP1.getFailedAttacks()));
-        assertEquals(false,isCoordinateInList(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
+        assertEquals(true,isCoordinateInSet(attackCoordinate,battlegroundP1.getFailedAttacks()));
+        assertEquals(false,isCoordinateInSet(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
     }
 
     @Test
@@ -42,7 +42,7 @@ class BattlegroundTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
         shipPositions.add(new int[] {0,3});
@@ -57,13 +57,11 @@ class BattlegroundTest {
 
         int[] attackCoordinate = {0,1};
         battlegroundP1.attacked(attackCoordinate);
-        assertEquals(false,isCoordinateInList(attackCoordinate,battlegroundP1.getFailedAttacks()));
-        assertEquals(true,isCoordinateInList(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
+        assertEquals(false,isCoordinateInSet(attackCoordinate,battlegroundP1.getFailedAttacks()));
+        assertEquals(true,isCoordinateInSet(attackCoordinate,battlegroundP1.getSuccessfulAttacks()));
     }
 
-    private boolean isCoordinateInList(int[] coordinate, List<int[]> list) {
-        if (list.stream().anyMatch(shipPos -> Arrays.equals(shipPos, coordinate)))
-            return true;
-        return false;
+    private boolean isCoordinateInSet(int[] coordinate, Set<int[]> set) {
+        return set.stream().anyMatch(setPoint -> Arrays.equals(setPoint,coordinate));
     }
 }

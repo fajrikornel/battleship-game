@@ -1,9 +1,5 @@
 package battleship;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Player {
     private Battleground battleground;
     protected boolean isAlive = true;

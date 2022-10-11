@@ -2,8 +2,8 @@ package battleship;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +13,8 @@ class BattlegroundPropertyValidatorTest {
         int battlegroundSize = 9; //Arbitrary number
         int numOfShipsUpperBoundTest = battlegroundSize*battlegroundSize/2 + 1;
         int numOfShipsLowerBoundTest = 0;
-        List<int[]> P1ShipPositionsUpper = generateMockShipPositions(battlegroundSize, numOfShipsUpperBoundTest);
-        List<int[]> P1ShipPositionsLower = generateMockShipPositions(battlegroundSize, numOfShipsLowerBoundTest);
+        Set<int[]> P1ShipPositionsUpper = generateMockShipPositions(battlegroundSize, numOfShipsUpperBoundTest);
+        Set<int[]> P1ShipPositionsLower = generateMockShipPositions(battlegroundSize, numOfShipsLowerBoundTest);
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
                 new BattlegroundPropertyValidator(battlegroundSize, numOfShipsUpperBoundTest, P1ShipPositionsUpper)
@@ -37,8 +37,8 @@ class BattlegroundPropertyValidatorTest {
         int battlegroundSizeUpperBoundTest = 10;
         int battlegroundSizeLowerBoundTest = 0;
         int numOfShips = 3;
-        List<int[]> shipPositionsUpperBoundTest = generateMockShipPositions(battlegroundSizeUpperBoundTest, numOfShips);
-        List<int[]> shipPositionsLowerBoundTest = generateMockShipPositions(battlegroundSizeLowerBoundTest, numOfShips);
+        Set<int[]> shipPositionsUpperBoundTest = generateMockShipPositions(battlegroundSizeUpperBoundTest, numOfShips);
+        Set<int[]> shipPositionsLowerBoundTest = generateMockShipPositions(battlegroundSizeLowerBoundTest, numOfShips);
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
                 new BattlegroundPropertyValidator(battlegroundSizeUpperBoundTest, numOfShips, shipPositionsUpperBoundTest)
@@ -62,8 +62,8 @@ class BattlegroundPropertyValidatorTest {
         int numOfP1AndP2ShipsCorrect = 2; //Arbitrary number
         int numOfP1ShipsWrong = 1;
         int numOfP2ShipsWrong = 3;
-        List<int[]> P1ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP1ShipsWrong);
-        List<int[]> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP2ShipsWrong);
+        Set<int[]> P1ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP1ShipsWrong);
+        Set<int[]> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP2ShipsWrong);
 
         Exception exceptionNumOfShipsMore = assertThrows(IllegalArgumentException.class, () ->
                 new BattlegroundPropertyValidator(battlegroundSize, numOfP1AndP2ShipsCorrect, P1ShipPositionsWrong)
@@ -84,11 +84,11 @@ class BattlegroundPropertyValidatorTest {
     @Test
     public void givenCoordinatesOutOfBattlefieldThrowError() {
         int battlegroundSize = 9; //Arbitrary number
-        int numOfShips = 2; //Arbitrary number
-        List<int[]> P1ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfShips);
-        P1ShipPositionsWrong.get(0)[0] = -1;
-        List<int[]> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfShips);
-        P2ShipPositionsWrong.get(0)[0] = battlegroundSize;
+        int numOfShips = 1; //Arbitrary number
+        Set<int[]> P1ShipPositionsWrong = new HashSet<>();
+        P1ShipPositionsWrong.add(new int[] {0,-1});
+        Set<int[]> P2ShipPositionsWrong = new HashSet<>();
+        P2ShipPositionsWrong.add(new int[] {0,battlegroundSize});
 
         Exception exceptionCoordinateLessThanZero = assertThrows(IllegalArgumentException.class, () ->
                 new BattlegroundPropertyValidator(battlegroundSize, numOfShips, P2ShipPositionsWrong)
@@ -106,14 +106,14 @@ class BattlegroundPropertyValidatorTest {
         assertTrue(exceptionCoordinateMoreThanBattlegroundMessage.contains("All ships must be inside the battlefield."));
     }
 
-    private List<int[]> generateMockShipPositions(int battlegroundSize, int numOfShips) {
+    private Set<int[]> generateMockShipPositions(int battlegroundSize, int numOfShips) {
         if (numOfShips == 0) {
-            return new ArrayList<int[]>();
+            return new HashSet<>();
         } else if (numOfShips < 0) {
             throw new IllegalArgumentException("numOfShips must be a positive integer.");
         }
 
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<>();
 
         int shipCounter = 0;
         for (int x = 0; x < battlegroundSize; x++) {

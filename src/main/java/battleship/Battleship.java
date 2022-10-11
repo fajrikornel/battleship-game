@@ -1,6 +1,6 @@
 package battleship;
 
-import java.util.List;
+import java.util.Set;
 
 public class Battleship {
     private Player P1;
@@ -9,8 +9,8 @@ public class Battleship {
     public Battleship(int battlegroundSize,
                       int numOfShips,
                       int numOfMissiles,
-                      List<int[]> P1ShipPositions,
-                      List<int[]> P2ShipPositions) {
+                      Set<int[]> P1ShipPositions,
+                      Set<int[]> P2ShipPositions) {
 
         this.P1 = new Player(numOfMissiles);
         Battleground battlegroundP1 = new Battleground(

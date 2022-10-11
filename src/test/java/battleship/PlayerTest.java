@@ -2,9 +2,8 @@ package battleship;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +16,7 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
         shipPositions.add(new int[] {0,3});
@@ -49,7 +48,7 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
         shipPositions.add(new int[] {0,3});
@@ -82,7 +81,7 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        List<int[]> shipPositions = new ArrayList<int[]>();
+        Set<int[]> shipPositions = new HashSet<int[]>();
         shipPositions.add(new int[] {0,1});
         shipPositions.add(new int[] {0,2});
         shipPositions.add(new int[] {0,3});
