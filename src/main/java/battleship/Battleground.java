@@ -31,6 +31,10 @@ public class Battleground {
         this.player = player;
     }
 
+    protected Player getPlayer() {
+        return this.player;
+    }
+
     public Set<int[]> getSuccessfulAttacks() {
         return successfulAttacks;
     }

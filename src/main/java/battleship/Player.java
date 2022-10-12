@@ -17,6 +17,10 @@ public class Player {
         battleground.updateAliveStatus();
     }
 
+    protected Battleground getBattleground() {
+        return battleground;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
