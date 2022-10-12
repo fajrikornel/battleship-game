@@ -1,6 +1,5 @@
 package battleship;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,12 +27,20 @@ public class Battleground {
         propertyValidator.validateBattlegroundProperties();
     }
 
+    public int getBattlegroundSize() {
+        return battlegroundSize;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
 
     protected Player getPlayer() {
         return this.player;
+    }
+
+    public Set<List<Integer>> getShipPositions() {
+        return shipPositions;
     }
 
     public Set<List<Integer>> getSuccessfulAttacks() {
