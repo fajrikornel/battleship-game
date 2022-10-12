@@ -13,7 +13,7 @@ public class BattleshipContextImpl implements BattleshipContext {
             allPlayers.add(player);
 
         int firstPlayerTurn = 0;
-        this.state = new Turn(allPlayers, firstPlayerTurn, this);
+        this.state = new Turn(firstPlayerTurn, this);
     }
 
     public void setState(BattleshipState state) {

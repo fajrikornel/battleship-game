@@ -55,14 +55,10 @@ public class Battleground {
     public void attacked(List<Integer> attackCoordinate) {
         if (isCoordinateInSet(attackCoordinate, shipPositions)) {
             successfulAttacks.add(attackCoordinate);
-            System.out.println("Successful attack. Size: " + successfulAttacks.size());
-            successfulAttacks.stream().forEach(s -> System.out.println("Success coordinate: " + s.get(0) + "," + s.get(1)));
             if (isAllShipsDestroyed())
                 updateAliveStatus();
         } else {
             failedAttacks.add(attackCoordinate);
-            System.out.println("Failed attack. Size: " + failedAttacks.size());
-            failedAttacks.stream().forEach(s -> System.out.println("Failed coordinate: " + s.get(0) + "," + s.get(1)));
         }
     }
 

@@ -1,6 +1,5 @@
 package battleship;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +10,16 @@ public class Turn implements BattleshipState {
     private Player targetPlayer;
     private BattleshipContext battleshipContext;
 
-    public Turn(List<Player> playerList,
-                int currentPlayerIndex,
-                BattleshipContext battleshipContext) {
-        this.playerList = new ArrayList<>(playerList);
+    public Turn(int currentPlayerIndex, BattleshipContext battleshipContext) {
         this.currentPlayerIndex = currentPlayerIndex;
+        this.battleshipContext = battleshipContext;
+        this.playerList = battleshipContext.getAllPlayers();
         this.currentPlayer = playerList.get(currentPlayerIndex);
         this.targetPlayer = playerList.get(getTargetPlayerIndex());
-        this.battleshipContext = battleshipContext;
+
+        if (isCurrentPlayerOutOfMissiles()) {
+            switchState();
+        }
     }
 
     private int getTargetPlayerIndex() {
@@ -26,6 +27,10 @@ public class Turn implements BattleshipState {
         if (nextPlayerIndex >= playerList.size())
             nextPlayerIndex = 0;
         return nextPlayerIndex;
+    }
+
+    private boolean isCurrentPlayerOutOfMissiles() {
+        return currentPlayer.getNumOfMissilesAvailable() == 0;
     }
 
     protected List<Player> getPlayerList() {
@@ -42,23 +47,18 @@ public class Turn implements BattleshipState {
     }
 
     private void switchState() {
-        int nextTurnPlayerIndex = getTargetPlayerIndex();
-        if (isCurrentPlayerOutOfMissiles()) {
-            playerList.remove(currentPlayerIndex);
-            if (playerList.size() == 0) {
-                GameOver gameOver = new GameOver(battleshipContext);
-                battleshipContext.setState(gameOver);
-                return;
-            }
-            nextTurnPlayerIndex = currentPlayerIndex;
+        BattleshipState nextState;
+        if (isAllPlayersOutOfMissiles()) {
+            nextState = new GameOver(battleshipContext);
+        } else {
+            int nextTurnPlayerIndex = getTargetPlayerIndex();
+            nextState = new Turn(nextTurnPlayerIndex, battleshipContext);
         }
-
-        Turn nextTurn = new Turn(playerList, nextTurnPlayerIndex, battleshipContext);
-        battleshipContext.setState(nextTurn);
+        battleshipContext.setState(nextState);
     }
 
-    private boolean isCurrentPlayerOutOfMissiles() {
-        return currentPlayer.getNumOfMissilesAvailable() == 0;
+    private boolean isAllPlayersOutOfMissiles() {
+        return playerList.stream().allMatch(player -> player.getNumOfMissilesAvailable() == 0);
     }
 
     public Map<Player, PlayerReport> getPlayerReports() {

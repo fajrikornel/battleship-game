@@ -13,7 +13,7 @@ public class GameOver implements BattleshipState {
     }
 
     public Player getCurrentPlayer() {
-        return null;
+        throw new IllegalStateException("GameOver does not have a currentPlayer.");
     }
 
     public Map<Player, PlayerReport> getPlayerReports() {

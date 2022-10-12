@@ -44,37 +44,6 @@ class BattleshipContextImplTest {
     }
 
     @Test
-    public void whenPlayerOutOfMissilesThenRemovePlayerFromTurn() {
-        int battlegroundSize = 5;
-        int numOfShips = 5;
-        int numOfMissiles = 1;
-
-        PlayerFactory P1Factory = new RandomShipPositionsPlayerFactory(
-                battlegroundSize,
-                numOfShips,
-                numOfMissiles
-        );
-
-        PlayerFactory P2Factory = new RandomShipPositionsPlayerFactory(
-                battlegroundSize,
-                numOfShips,
-                numOfMissiles
-        );
-
-        Player P1 = P1Factory.getPlayerOrCreatePlayerIfNotCreated();
-        Player P2 = P2Factory.getPlayerOrCreatePlayerIfNotCreated();
-
-        BattleshipContext twoPlayerBattleship = new BattleshipContextImpl(P1, P2);
-
-        List<Integer> attackCoordinate = new ArrayList<>(List.of(0, 0));
-        twoPlayerBattleship.attack(attackCoordinate);
-        Turn state = (Turn) twoPlayerBattleship.getState();
-        List<Player> playerList = state.getPlayerList();
-
-        assertFalse(playerList.stream().anyMatch(player -> player == P1));
-    }
-
-    @Test
     public void whenAllPlayersOutOfMissilesThenChangeStateToGameOver() {
         int battlegroundSize = 5;
         int numOfShips = 5;
