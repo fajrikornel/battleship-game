@@ -1,8 +1,6 @@
 package battleship;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class RandomShipPositionsPlayerFactory implements PlayerFactory {
     private Player player;
@@ -10,7 +8,7 @@ public class RandomShipPositionsPlayerFactory implements PlayerFactory {
     private int battlegroundSize;
     private int numOfShips;
     private int numOfMissiles;
-    private Set<int[]> shipPositions = new HashSet<>();
+    private Set<List<Integer>> shipPositions = new HashSet<>();
 
     public RandomShipPositionsPlayerFactory(
             int battlegroundSize,
@@ -42,7 +40,9 @@ public class RandomShipPositionsPlayerFactory implements PlayerFactory {
         while (shipPositions.size() != numOfShips) {
             int xCoordinate = rand.nextInt(battlegroundSize);
             int yCoordinate = rand.nextInt(battlegroundSize);
-            int[] shipCoordinate = {xCoordinate, yCoordinate};
+            List<Integer> shipCoordinate = new ArrayList<>();
+            shipCoordinate.add(xCoordinate);
+            shipCoordinate.add(yCoordinate);
             shipPositions.add(shipCoordinate);
         }
     }

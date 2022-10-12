@@ -2,20 +2,21 @@ package battleship;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Battleground {
     private Player player;
     private int battlegroundSize;
     private int numOfShips;
-    private Set<int[]> shipPositions;
-    private Set<int[]> successfulAttacks = new HashSet<int[]>();
-    private Set<int[]> failedAttacks = new HashSet<int[]>();
+    private Set<List<Integer>> shipPositions;
+    private Set<List<Integer>> successfulAttacks = new HashSet<>();
+    private Set<List<Integer>> failedAttacks = new HashSet<>();
 
     public Battleground(
             int battlegroundSize,
             int numOfShips,
-            Set<int[]> shipPositions) {
+            Set<List<Integer>> shipPositions) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
@@ -35,26 +36,38 @@ public class Battleground {
         return this.player;
     }
 
-    public Set<int[]> getSuccessfulAttacks() {
+    public Set<List<Integer>> getSuccessfulAttacks() {
         return successfulAttacks;
     }
 
-    public Set<int[]> getFailedAttacks() {
+    public Set<List<Integer>> getFailedAttacks() {
         return failedAttacks;
     }
 
-    public void attacked(int[] attackCoordinate) {
+    public int getNumOfDestroyedShips() {
+        return successfulAttacks.size();
+    }
+
+    public int getNumOfIntactShips() {
+        return failedAttacks.size();
+    }
+
+    public void attacked(List<Integer> attackCoordinate) {
         if (isCoordinateInSet(attackCoordinate, shipPositions)) {
             successfulAttacks.add(attackCoordinate);
+            System.out.println("Successful attack. Size: " + successfulAttacks.size());
+            successfulAttacks.stream().forEach(s -> System.out.println("Success coordinate: " + s.get(0) + "," + s.get(1)));
             if (isAllShipsDestroyed())
                 updateAliveStatus();
         } else {
             failedAttacks.add(attackCoordinate);
+            System.out.println("Failed attack. Size: " + failedAttacks.size());
+            failedAttacks.stream().forEach(s -> System.out.println("Failed coordinate: " + s.get(0) + "," + s.get(1)));
         }
     }
 
-    private boolean isCoordinateInSet(int[] coordinate, Set<int[]> positions) {
-        return positions.stream().anyMatch(pos -> Arrays.equals(pos, coordinate));
+    private boolean isCoordinateInSet(List<Integer> coordinate, Set<List<Integer>> positions) {
+        return positions.contains(coordinate);
     }
 
     private boolean isAllShipsDestroyed() {

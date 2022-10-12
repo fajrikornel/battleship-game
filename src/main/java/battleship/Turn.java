@@ -1,6 +1,8 @@
 package battleship;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Turn implements BattleshipState {
     private List<Player> playerList;
@@ -12,7 +14,7 @@ public class Turn implements BattleshipState {
     public Turn(List<Player> playerList,
                 int currentPlayerIndex,
                 BattleshipContext battleshipContext) {
-        this.playerList = playerList;
+        this.playerList = new ArrayList<>(playerList);
         this.currentPlayerIndex = currentPlayerIndex;
         this.currentPlayer = playerList.get(currentPlayerIndex);
         this.targetPlayer = playerList.get(getTargetPlayerIndex());
@@ -26,11 +28,15 @@ public class Turn implements BattleshipState {
         return nextPlayerIndex;
     }
 
+    protected List<Player> getPlayerList() {
+        return playerList;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
-    public void attack(int[] attackCoordinate) {
+    public void attack(List<Integer> attackCoordinate) {
         currentPlayer.attack(targetPlayer, attackCoordinate);
         switchState();
     }
@@ -39,6 +45,11 @@ public class Turn implements BattleshipState {
         int nextTurnPlayerIndex = getTargetPlayerIndex();
         if (isCurrentPlayerOutOfMissiles()) {
             playerList.remove(currentPlayerIndex);
+            if (playerList.size() == 0) {
+                GameOver gameOver = new GameOver(battleshipContext);
+                battleshipContext.setState(gameOver);
+                return;
+            }
             nextTurnPlayerIndex = currentPlayerIndex;
         }
 
@@ -47,6 +58,10 @@ public class Turn implements BattleshipState {
     }
 
     private boolean isCurrentPlayerOutOfMissiles() {
-        return currentPlayer.getNumOfMissiles() == 0;
+        return currentPlayer.getNumOfMissilesAvailable() == 0;
+    }
+
+    public Map<Player, PlayerReport> getPlayerReports() {
+        throw new IllegalStateException("Turn state does not have getPlayerReports() method");
     }
 }

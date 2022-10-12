@@ -2,6 +2,7 @@ package battleship;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BattleshipContextImpl implements BattleshipContext {
     private BattleshipState state;
@@ -23,12 +24,19 @@ public class BattleshipContextImpl implements BattleshipContext {
         return state;
     }
 
+    public List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
     public Player getCurrentPlayer() {
         return state.getCurrentPlayer();
     }
 
-    public void attack(int[] coordinate) {
+    public void attack(List<Integer> coordinate) {
         state.attack(coordinate);
     }
 
+    public Map<Player, PlayerReport> getPlayerReports() {
+        return state.getPlayerReports();
+    }
 }

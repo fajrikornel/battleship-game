@@ -2,7 +2,9 @@ package battleship;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,11 +18,11 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        Set<int[]> shipPositions = new HashSet<int[]>();
-        shipPositions.add(new int[] {0,1});
-        shipPositions.add(new int[] {0,2});
-        shipPositions.add(new int[] {0,3});
-        shipPositions.add(new int[] {0,4});
+        Set<List<Integer>> shipPositions = new HashSet<>();
+        shipPositions.add(new ArrayList<>(List.of(0,1)));
+        shipPositions.add(new ArrayList<>(List.of(0,2)));
+        shipPositions.add(new ArrayList<>(List.of(0,3)));
+        shipPositions.add(new ArrayList<>(List.of(0,4)));
         Battleground battlegroundP1 = new Battleground(
                 battlegroundSize,
                 numOfShips,
@@ -35,9 +37,9 @@ class PlayerTest {
         battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
-        int[] attackCoordinate = {0,1};
+        List<Integer> attackCoordinate = new ArrayList<>(List.of(0,1));
         P1.attack(P2, attackCoordinate);
-        assertEquals(numOfMissiles - 1, P1.getNumOfMissiles());
+        assertEquals(numOfMissiles - 1, P1.getNumOfMissilesAvailable());
     }
 
     @Test
@@ -48,11 +50,11 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        Set<int[]> shipPositions = new HashSet<int[]>();
-        shipPositions.add(new int[] {0,1});
-        shipPositions.add(new int[] {0,2});
-        shipPositions.add(new int[] {0,3});
-        shipPositions.add(new int[] {0,4});
+        Set<List<Integer>> shipPositions = new HashSet<>();
+        shipPositions.add(new ArrayList<>(List.of(0,1)));
+        shipPositions.add(new ArrayList<>(List.of(0,2)));
+        shipPositions.add(new ArrayList<>(List.of(0,3)));
+        shipPositions.add(new ArrayList<>(List.of(0,4)));
         Battleground battlegroundP1 = new Battleground(
                 battlegroundSize,
                 numOfShips,
@@ -67,10 +69,10 @@ class PlayerTest {
         battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
-        int[] attackCoordinate = {0,1};
+        List<Integer> attackCoordinate = new ArrayList<>(List.of(0,1));
         P1.attack(P2, attackCoordinate);
         P1.attack(P2, attackCoordinate);
-        assertEquals(0, P1.getNumOfMissiles());
+        assertEquals(0, P1.getNumOfMissilesAvailable());
     }
 
     @Test
@@ -81,11 +83,11 @@ class PlayerTest {
 
         int battlegroundSize = 5;
         int numOfShips = 4;
-        Set<int[]> shipPositions = new HashSet<int[]>();
-        shipPositions.add(new int[] {0,1});
-        shipPositions.add(new int[] {0,2});
-        shipPositions.add(new int[] {0,3});
-        shipPositions.add(new int[] {0,4});
+        Set<List<Integer>> shipPositions = new HashSet<>();
+        shipPositions.add(new ArrayList<>(List.of(0,1)));
+        shipPositions.add(new ArrayList<>(List.of(0,2)));
+        shipPositions.add(new ArrayList<>(List.of(0,3)));
+        shipPositions.add(new ArrayList<>(List.of(0,4)));
         Battleground battlegroundP1 = new Battleground(
                 battlegroundSize,
                 numOfShips,
@@ -100,13 +102,13 @@ class PlayerTest {
         battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
-        int[] attackCoordinateOne = {0,1};
+        List<Integer> attackCoordinateOne = new ArrayList<>(List.of(0,1));
         P1.attack(P2, attackCoordinateOne);
-        int[] attackCoordinateTwo = {0,2};
+        List<Integer> attackCoordinateTwo = new ArrayList<>(List.of(0,2));
         P1.attack(P2, attackCoordinateTwo);
-        int[] attackCoordinateThree = {0,3};
+        List<Integer> attackCoordinateThree = new ArrayList<>(List.of(0,3));
         P1.attack(P2, attackCoordinateThree);
-        int[] attackCoordinateFour = {0,4};
+        List<Integer> attackCoordinateFour = new ArrayList<>(List.of(0,4));
         P1.attack(P2, attackCoordinateFour);
         assertFalse(P2.isAlive());
     }

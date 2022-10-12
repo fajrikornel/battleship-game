@@ -1,16 +1,17 @@
 package battleship;
 
+import java.util.List;
 import java.util.Set;
 
 public class BattlegroundPropertyValidator {
     private int battlegroundSize;
     private int numOfShips;
-    private Set<int[]> shipPositions;
+    private Set<List<Integer>> shipPositions;
 
     public BattlegroundPropertyValidator(
             int battlegroundSize,
             int numOfShips,
-            Set<int[]> shipPositions) {
+            Set<List<Integer>> shipPositions) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
@@ -55,9 +56,9 @@ public class BattlegroundPropertyValidator {
         shipPositions.forEach(this::validateCoordinateIsInsideBattleground);
     }
 
-    private void validateCoordinateIsInsideBattleground(int[] coordinate) {
-        if (coordinate[0] >= battlegroundSize || coordinate[0] < 0 ||
-                coordinate[1] >= battlegroundSize || coordinate[1] < 0) {
+    private void validateCoordinateIsInsideBattleground(List<Integer> coordinate) {
+        if (coordinate.get(0) >= battlegroundSize || coordinate.get(0) < 0 ||
+                coordinate.get(1) >= battlegroundSize || coordinate.get(1) < 0) {
             throw new IllegalArgumentException("All ships must be inside the battlefield.");
         }
     }
