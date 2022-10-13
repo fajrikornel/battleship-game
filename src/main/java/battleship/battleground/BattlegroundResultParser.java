@@ -16,28 +16,28 @@ public class BattlegroundResultParser {
         destroyedShipPositions = battleground.getSuccessfulAttacks();
         failedMissileAttackPositions = battleground.getFailedAttacks();
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int x = 0; x < battlegroundSize; x++) {
             for (int y = 0; y < battlegroundSize; y++) {
 
                 List<Integer> currentCoordinate = new ArrayList<>(List.of(x,y));
                 if (isCoordinateOfDestroyedShip(currentCoordinate)) {
-                    result += "X";
+                    result.append("X");
                 } else if (isCoordinateOfIntactShip(currentCoordinate)) {
-                    result += "B";
+                    result.append("B");
                 } else if (isCoordinateOfFailedMissileAttack(currentCoordinate)) {
-                    result += "O";
+                    result.append("O");
                 } else {
-                    result += "_";
+                    result.append("_");
                 }
-                result += " ";
+                result.append(" ");
             }
             int lastRow = battlegroundSize - 1;
             if ( x != lastRow) {
-                result += "\n";
+                result.append("\n");
             }
         }
-        return result;
+        return result.toString();
     }
 
     private static boolean isCoordinateOfDestroyedShip(List<Integer> coordinate) { //X

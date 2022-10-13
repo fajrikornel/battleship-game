@@ -1,7 +1,7 @@
 package battleship.player;
 
 public class PlayerPropertyValidatorImpl implements PlayerPropertyValidator {
-    private int numOfMissiles;
+    private final int numOfMissiles;
 
     public PlayerPropertyValidatorImpl(int numOfMissiles) {
         this.numOfMissiles = numOfMissiles;

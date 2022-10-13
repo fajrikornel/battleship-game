@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 public class BattlegroundPropertyValidatorImpl implements BattlegroundPropertyValidator {
-    private int battlegroundSize;
-    private int numOfShips;
-    private Set<List<Integer>> shipPositions;
+    private final int battlegroundSize;
+    private final int numOfShips;
+    private final Set<List<Integer>> shipPositions;
 
     public BattlegroundPropertyValidatorImpl(
             int battlegroundSize,

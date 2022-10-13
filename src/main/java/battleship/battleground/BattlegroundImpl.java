@@ -8,23 +8,21 @@ import java.util.Set;
 
 public class BattlegroundImpl implements Battleground {
     private Player player;
-    private int battlegroundSize;
-    private int numOfShips;
-    private Set<List<Integer>> shipPositions;
-    private Set<List<Integer>> successfulAttacks = new HashSet<>();
-    private Set<List<Integer>> failedAttacks = new HashSet<>();
+    private final int battlegroundSize;
+    private final Set<List<Integer>> shipPositions;
+    private final Set<List<Integer>> successfulAttacks = new HashSet<>();
+    private final Set<List<Integer>> failedAttacks = new HashSet<>();
 
     public BattlegroundImpl(
             int battlegroundSize,
             int numOfShips,
             Set<List<Integer>> shipPositions) {
         this.battlegroundSize = battlegroundSize;
-        this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
 
         BattlegroundPropertyValidator propertyValidator = new BattlegroundPropertyValidatorImpl(
                 this.battlegroundSize,
-                this.numOfShips,
+                numOfShips,
                 this.shipPositions);
         propertyValidator.validateBattlegroundProperties();
     }

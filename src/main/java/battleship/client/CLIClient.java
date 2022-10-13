@@ -10,13 +10,11 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class CLIClient implements Client {
-    private InputStream in;
-    private Scanner scanner;
-    private PrintStream out;
+    private final Scanner scanner;
+    private final PrintStream out;
     private Context context;
 
     public CLIClient(InputStream in, PrintStream out) {
-        this.in = in;
         scanner = new Scanner(in);
         this.out = out;
     }
@@ -50,8 +48,8 @@ public class CLIClient implements Client {
     private void executeTurn(String stateString) {
         out.println(stateString);
         out.print("INSERT ATTACK COORDINATE: ");
-        int xCoordinate = -1;
-        int yCoordinate = -1;
+        int xCoordinate;
+        int yCoordinate;
         while (true) {
             try {
                 String attackCoordinateString = scanner.nextLine();

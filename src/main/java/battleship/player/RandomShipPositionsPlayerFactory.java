@@ -7,11 +7,10 @@ import java.util.*;
 
 public class RandomShipPositionsPlayerFactory implements PlayerFactory {
     private Player player;
-    private Battleground battleground;
-    private int battlegroundSize;
-    private int numOfShips;
-    private int numOfMissiles;
-    private Set<List<Integer>> shipPositions = new HashSet<>();
+    private final int battlegroundSize;
+    private final int numOfShips;
+    private final int numOfMissiles;
+    private final Set<List<Integer>> shipPositions = new HashSet<>();
 
     public RandomShipPositionsPlayerFactory(
             int battlegroundSize,
@@ -26,7 +25,7 @@ public class RandomShipPositionsPlayerFactory implements PlayerFactory {
         if (player == null) {
             player = new PlayerImpl(numOfMissiles);
             generateRandomShipPositions();
-            battleground = new BattlegroundImpl(
+            Battleground battleground = new BattlegroundImpl(
                     battlegroundSize,
                     numOfShips,
                     shipPositions

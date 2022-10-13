@@ -5,9 +5,12 @@ import java.lang.reflect.Field;
 public class PlayerReportParser {
 
     public static String getPlayerReport(PlayerReport player) throws IllegalAccessException {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (Field field : player.getClass().getDeclaredFields())
-            result += field.getName() + ":" + field.get(player) + "\n";
-        return result;
+            result.append(field.getName())
+                    .append(":")
+                    .append(field.get(player))
+                    .append("\n");
+        return result.toString();
     }
 }

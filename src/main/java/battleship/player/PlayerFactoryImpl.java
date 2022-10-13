@@ -8,10 +8,9 @@ import java.util.Set;
 
 public class PlayerFactoryImpl implements PlayerFactory {
     private Player player;
-    private Battleground battleground;
-    private int battlegroundSize;
-    private int numOfShips;
-    private int numOfMissiles;
+    private final int battlegroundSize;
+    private final int numOfShips;
+    private final int numOfMissiles;
     Set<List<Integer>> shipPositions;
 
 
@@ -28,7 +27,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
     public Player getPlayerOrCreatePlayerIfNotCreated() {
         if (player == null) {
             player = new PlayerImpl(numOfMissiles);
-            battleground = new BattlegroundImpl(
+            Battleground battleground = new BattlegroundImpl(
                     battlegroundSize,
                     numOfShips,
                     shipPositions
