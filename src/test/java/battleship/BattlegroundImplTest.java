@@ -10,7 +10,7 @@ class BattlegroundImplTest {
     @Test
     public void givenFailedAttackThenAddAttackCoordinateToFailedAttacks() {
         int numOfMissiles = 2;
-        Player P1 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
 
         int battlegroundSize = 5;
         int numOfShips = 4;
@@ -36,7 +36,7 @@ class BattlegroundImplTest {
     @Test
     public void givenSuccessfulAttackThenAddAttackCoordinateToSuccessfulAttacks() {
         int numOfMissiles = 2;
-        Player P1 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
 
         int battlegroundSize = 5;
         int numOfShips = 4;

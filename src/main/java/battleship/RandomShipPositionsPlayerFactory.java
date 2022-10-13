@@ -21,7 +21,7 @@ public class RandomShipPositionsPlayerFactory implements PlayerFactory {
 
     public Player getPlayerOrCreatePlayerIfNotCreated() {
         if (player == null) {
-            player = new Player(numOfMissiles);
+            player = new PlayerImpl(numOfMissiles);
             generateRandomShipPositions();
             battleground = new BattlegroundImpl(
                     battlegroundSize,

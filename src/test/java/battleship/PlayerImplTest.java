@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class PlayerTest {
+class PlayerImplTest {
     @Test
     public void givenMissileAvailableWhenPlayerAttacksThenMissileDecreasesByOne() {
         int numOfMissiles = 2;
-        Player P1 = new Player(numOfMissiles);
-        Player P2 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
+        Player P2 = new PlayerImpl(numOfMissiles);
 
         int battlegroundSize = 5;
         int numOfShips = 4;
@@ -44,8 +44,8 @@ class PlayerTest {
     @Test
     public void givenOutOfMissilesWhenPlayerAttacksThenMissileStillZero() {
         int numOfMissiles = 1;
-        Player P1 = new Player(numOfMissiles);
-        Player P2 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
+        Player P2 = new PlayerImpl(numOfMissiles);
 
         int battlegroundSize = 5;
         int numOfShips = 4;
@@ -77,8 +77,8 @@ class PlayerTest {
     @Test
     public void whenAllShipsDestroyedThenPlayerStateNotAlive() {
         int numOfMissiles = 4;
-        Player P1 = new Player(numOfMissiles);
-        Player P2 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
+        Player P2 = new PlayerImpl(numOfMissiles);
 
         int battlegroundSize = 5;
         int numOfShips = 4;

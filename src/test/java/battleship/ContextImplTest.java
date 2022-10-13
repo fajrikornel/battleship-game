@@ -82,7 +82,7 @@ class ContextImplTest {
         Set<List<Integer>> shipPositions = //{{0,0}, {0,1}}
                 generateMockShipPositions(battlegroundSize, numOfShips);
 
-        Player P1 = new Player(numOfMissiles);
+        Player P1 = new PlayerImpl(numOfMissiles);
         Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
@@ -91,7 +91,7 @@ class ContextImplTest {
         battlegroundP1.setPlayer(P1);
         P1.setBattleground(battlegroundP1);
 
-        Player P2 = new Player(numOfMissiles);
+        Player P2 = new PlayerImpl(numOfMissiles);
         Battleground battlegroundP2 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,

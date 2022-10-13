@@ -24,7 +24,7 @@ public class PlayerFactoryImpl implements PlayerFactory {
     }
     public Player getPlayerOrCreatePlayerIfNotCreated() {
         if (player == null) {
-            player = new Player(numOfMissiles);
+            player = new PlayerImpl(numOfMissiles);
             battleground = new BattlegroundImpl(
                     battlegroundSize,
                     numOfShips,
