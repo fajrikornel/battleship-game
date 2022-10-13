@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BattleshipContextImpl implements BattleshipContext {
-    private BattleshipState state;
+public class ContextImpl implements Context {
+    private State state;
     private List<Player> allPlayers = new ArrayList<>();
 
-    public BattleshipContextImpl(Player... players) {
+    public ContextImpl(Player... players) {
         for (Player player: players)
             allPlayers.add(player);
 
@@ -16,11 +16,11 @@ public class BattleshipContextImpl implements BattleshipContext {
         this.state = new Turn(firstPlayerTurn, this);
     }
 
-    public void setState(BattleshipState state) {
+    public void setState(State state) {
         this.state = state;
     }
 
-    public BattleshipState getState() {
+    public State getState() {
         return state;
     }
 

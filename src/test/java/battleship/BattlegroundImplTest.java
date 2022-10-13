@@ -6,7 +6,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BattlegroundTest {
+class BattlegroundImplTest {
     @Test
     public void givenFailedAttackThenAddAttackCoordinateToFailedAttacks() {
         int numOfMissiles = 2;
@@ -19,7 +19,7 @@ class BattlegroundTest {
         shipPositions.add(new ArrayList<>(List.of(0,2)));
         shipPositions.add(new ArrayList<>(List.of(0,3)));
         shipPositions.add(new ArrayList<>(List.of(0,4)));
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
@@ -45,7 +45,7 @@ class BattlegroundTest {
         shipPositions.add(new ArrayList<>(List.of(0,2)));
         shipPositions.add(new ArrayList<>(List.of(0,3)));
         shipPositions.add(new ArrayList<>(List.of(0,4)));
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);

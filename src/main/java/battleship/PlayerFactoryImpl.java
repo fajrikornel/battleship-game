@@ -1,28 +1,30 @@
 package battleship;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
-public class RandomShipPositionsPlayerFactory implements PlayerFactory {
+public class PlayerFactoryImpl implements PlayerFactory {
     private Player player;
     private Battleground battleground;
     private int battlegroundSize;
     private int numOfShips;
     private int numOfMissiles;
-    private Set<List<Integer>> shipPositions = new HashSet<>();
+    Set<List<Integer>> shipPositions;
 
-    public RandomShipPositionsPlayerFactory(
+
+    public PlayerFactoryImpl(
             int battlegroundSize,
             int numOfShips,
-            int numOfMissiles) {
+            int numOfMissiles,
+            Set<List<Integer>> shipPositions) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.numOfMissiles = numOfMissiles;
+        this.shipPositions = shipPositions;
     }
-
     public Player getPlayerOrCreatePlayerIfNotCreated() {
         if (player == null) {
             player = new Player(numOfMissiles);
-            generateRandomShipPositions();
             battleground = new BattlegroundImpl(
                     battlegroundSize,
                     numOfShips,
@@ -33,17 +35,5 @@ public class RandomShipPositionsPlayerFactory implements PlayerFactory {
             player.setBattleground(battleground);
         }
         return player;
-    }
-
-    private void generateRandomShipPositions() {
-        Random rand = new Random();
-        while (shipPositions.size() != numOfShips) {
-            int xCoordinate = rand.nextInt(battlegroundSize);
-            int yCoordinate = rand.nextInt(battlegroundSize);
-            List<Integer> shipCoordinate = new ArrayList<>();
-            shipCoordinate.add(xCoordinate);
-            shipCoordinate.add(yCoordinate);
-            shipPositions.add(shipCoordinate);
-        }
     }
 }

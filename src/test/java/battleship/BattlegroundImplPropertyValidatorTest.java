@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BattlegroundPropertyValidatorTest {
+class BattlegroundImplPropertyValidatorTest {
     @Test
     public void givenNumOfShipsOutOfDefinedRangeThrowError() {
         int battlegroundSize = 9; //Arbitrary number

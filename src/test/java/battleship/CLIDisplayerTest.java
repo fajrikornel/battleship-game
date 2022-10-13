@@ -14,11 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CLIDisplayerTest {
 
-    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    private PrintStream printStream;
+    private ByteArrayOutputStream outputStream;
 
     @BeforeEach
     public void setUp() {
-        System.setOut(new PrintStream(outputStream));
+        outputStream = new ByteArrayOutputStream();
+        boolean autoFlush = true;
+        printStream = new PrintStream(outputStream, autoFlush);
     }
 
     @Test
@@ -32,7 +35,7 @@ class CLIDisplayerTest {
         playerReport.numOfDestroyedShips = 1;
         playerReport.numOfIntactShips = 1;
 
-        CLIDisplayer displayer = new CLIDisplayer();
+        CLIDisplayer displayer = new CLIDisplayer(printStream);
         try {
             displayer.displayPlayerReport(playerReport);
         } catch (Exception e) {
@@ -48,7 +51,6 @@ class CLIDisplayerTest {
                 numOfDestroyedShips:1
                 numOfIntactShips:1
                 """;
-
         assertEquals(correctDisplay, outputStream.toString());
     }
 
@@ -61,7 +63,7 @@ class CLIDisplayerTest {
         shipPositions.add(new ArrayList<>(List.of(2,0)));
         shipPositions.add(new ArrayList<>(List.of(0,2)));
 
-        Battleground battleground = new Battleground(
+        BattlegroundImpl battleground = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions
@@ -74,7 +76,7 @@ class CLIDisplayerTest {
 
         missileCoordinates.forEach(missile -> battleground.attacked(missile));
 
-        CLIDisplayer cliDisplayer = new CLIDisplayer();
+        CLIDisplayer cliDisplayer = new CLIDisplayer(printStream);
         try {
             cliDisplayer.displayBattlegroundReport(battleground);
         } catch (Exception e) {
@@ -84,8 +86,7 @@ class CLIDisplayerTest {
         String correctDisplay = String.join("\n",
                 "O _ B ",
                 "B _ _ ",
-                "X _ O ",
-                "");
+                "X _ O ");
 
         assertEquals(correctDisplay, outputStream.toString());
     }

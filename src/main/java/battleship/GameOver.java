@@ -4,12 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameOver implements BattleshipState {
-    private BattleshipContext battleshipContext;
+public class GameOver implements State {
+    private Context context;
     private Map<Player, PlayerReport> playerReports;
 
-    public GameOver(BattleshipContext battleshipContext) {
-        this.battleshipContext = battleshipContext;
+    public GameOver(Context context) {
+        this.context = context;
     }
 
     public Player getCurrentPlayer() {
@@ -19,7 +19,7 @@ public class GameOver implements BattleshipState {
     public Map<Player, PlayerReport> getPlayerReports() {
         if (playerReports == null) {
             playerReports = new HashMap<>();
-            List<Player> allPlayers = battleshipContext.getAllPlayers();
+            List<Player> allPlayers = context.getAllPlayers();
             for (int i = 0; i < allPlayers.size(); i++) {
                 PlayerReport playerReport = getPlayerReport(allPlayers.get(i));
                 playerReports.put(allPlayers.get(i), playerReport);

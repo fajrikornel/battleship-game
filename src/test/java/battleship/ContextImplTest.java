@@ -6,7 +6,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BattleshipContextImplTest {
+class ContextImplTest {
 
     @Test
     public void givenMissilesAvailableWhenAttackExecutedThenPlayerTurnShouldChange() {
@@ -29,7 +29,7 @@ class BattleshipContextImplTest {
         Player P1 = P1Factory.getPlayerOrCreatePlayerIfNotCreated();
         Player P2 = P2Factory.getPlayerOrCreatePlayerIfNotCreated();
 
-        BattleshipContext twoPlayerBattleship = new BattleshipContextImpl(P1, P2);
+        Context twoPlayerBattleship = new ContextImpl(P1, P2);
 
         List<Integer> attackCoordinate = new ArrayList<>(List.of(0, 0));
         Player shouldBeP1 = twoPlayerBattleship.getCurrentPlayer();
@@ -64,12 +64,12 @@ class BattleshipContextImplTest {
         Player P1 = P1Factory.getPlayerOrCreatePlayerIfNotCreated();
         Player P2 = P2Factory.getPlayerOrCreatePlayerIfNotCreated();
 
-        BattleshipContext twoPlayerBattleship = new BattleshipContextImpl(P1, P2);
+        Context twoPlayerBattleship = new ContextImpl(P1, P2);
 
         List<Integer> attackCoordinate = new ArrayList<>(List.of(0, 0));
         twoPlayerBattleship.attack(attackCoordinate);
         twoPlayerBattleship.attack(attackCoordinate);
-        BattleshipState state = twoPlayerBattleship.getState();
+        State state = twoPlayerBattleship.getState();
 
         assertTrue(state instanceof GameOver);
     }
@@ -83,7 +83,7 @@ class BattleshipContextImplTest {
                 generateMockShipPositions(battlegroundSize, numOfShips);
 
         Player P1 = new Player(numOfMissiles);
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions
@@ -92,7 +92,7 @@ class BattleshipContextImplTest {
         P1.setBattleground(battlegroundP1);
 
         Player P2 = new Player(numOfMissiles);
-        Battleground battlegroundP2 = new Battleground(
+        Battleground battlegroundP2 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions
@@ -100,7 +100,7 @@ class BattleshipContextImplTest {
         battlegroundP2.setPlayer(P2);
         P2.setBattleground(battlegroundP2);
 
-        BattleshipContext twoPlayerBattleship = new BattleshipContextImpl(P1, P2);
+        Context twoPlayerBattleship = new ContextImpl(P1, P2);
 
         List<Integer> attackCoordinateP1One = new ArrayList<>(List.of(0, 0)); //Hit
         List<Integer> attackCoordinateP2One = new ArrayList<>(List.of(1, 0)); //No hit

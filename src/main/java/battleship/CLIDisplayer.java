@@ -1,18 +1,24 @@
 package battleship;
 
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class CLIDisplayer implements Displayer {
+    private PrintStream out;
     private Set<List<Integer>> shipPositions;
     private Set<List<Integer>> destroyedShipPositions;
     private Set<List<Integer>> failedMissileAttackPositions;
 
+    public CLIDisplayer(PrintStream out) {
+        this.out = out;
+    }
+
     public void displayPlayerReport(PlayerReport player) throws IllegalAccessException {
         for (Field field : player.getClass().getDeclaredFields())
-            System.out.println(field.getName() + ":" + field.get(player));
+            out.println(field.getName() + ":" + field.get(player));
     }
 
     public void displayBattlegroundReport(Battleground battleground) {
@@ -26,17 +32,20 @@ public class CLIDisplayer implements Displayer {
 
                 List<Integer> currentCoordinate = new ArrayList<>(List.of(x,y));
                 if (isCoordinateOfDestroyedShip(currentCoordinate)) {
-                    System.out.print("X");
+                    out.print("X");
                 } else if (isCoordinateOfIntactShip(currentCoordinate)) {
-                    System.out.print("B");
+                    out.print("B");
                 } else if (isCoordinateOfFailedMissileAttack(currentCoordinate)) {
-                    System.out.print("O");
+                    out.print("O");
                 } else {
-                    System.out.print("_");
+                    out.print("_");
                 }
-                System.out.print(" ");
+                out.print(" ");
             }
-            System.out.println();
+            int lastRow = battlegroundSize - 1;
+            if ( x != lastRow) {
+                out.println();
+            }
         }
 
     }

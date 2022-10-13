@@ -3,17 +3,17 @@ package battleship;
 import java.util.List;
 import java.util.Map;
 
-public class Turn implements BattleshipState {
+public class Turn implements State {
     private List<Player> playerList;
     private int currentPlayerIndex;
     private Player currentPlayer;
     private Player targetPlayer;
-    private BattleshipContext battleshipContext;
+    private Context context;
 
-    public Turn(int currentPlayerIndex, BattleshipContext battleshipContext) {
+    public Turn(int currentPlayerIndex, Context context) {
         this.currentPlayerIndex = currentPlayerIndex;
-        this.battleshipContext = battleshipContext;
-        this.playerList = battleshipContext.getAllPlayers();
+        this.context = context;
+        this.playerList = context.getAllPlayers();
         this.currentPlayer = playerList.get(currentPlayerIndex);
         this.targetPlayer = playerList.get(getTargetPlayerIndex());
 
@@ -47,14 +47,14 @@ public class Turn implements BattleshipState {
     }
 
     private void switchState() {
-        BattleshipState nextState;
+        State nextState;
         if (isAllPlayersOutOfMissiles()) {
-            nextState = new GameOver(battleshipContext);
+            nextState = new GameOver(context);
         } else {
             int nextTurnPlayerIndex = getTargetPlayerIndex();
-            nextState = new Turn(nextTurnPlayerIndex, battleshipContext);
+            nextState = new Turn(nextTurnPlayerIndex, context);
         }
-        battleshipContext.setState(nextState);
+        context.setState(nextState);
     }
 
     private boolean isAllPlayersOutOfMissiles() {

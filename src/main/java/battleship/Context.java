@@ -3,9 +3,9 @@ package battleship;
 import java.util.List;
 import java.util.Map;
 
-public interface BattleshipContext {
-    void setState(BattleshipState state);
-    BattleshipState getState();
+public interface Context {
+    void setState(State state);
+    State getState();
     List<Player> getAllPlayers();
     Player getCurrentPlayer();
     void attack(List<Integer> coordinate);

@@ -22,11 +22,11 @@ class PlayerTest {
         shipPositions.add(new ArrayList<>(List.of(0,2)));
         shipPositions.add(new ArrayList<>(List.of(0,3)));
         shipPositions.add(new ArrayList<>(List.of(0,4)));
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
-        Battleground battlegroundP2 = new Battleground(
+        Battleground battlegroundP2 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
@@ -54,11 +54,11 @@ class PlayerTest {
         shipPositions.add(new ArrayList<>(List.of(0,2)));
         shipPositions.add(new ArrayList<>(List.of(0,3)));
         shipPositions.add(new ArrayList<>(List.of(0,4)));
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
-        Battleground battlegroundP2 = new Battleground(
+        Battleground battlegroundP2 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
@@ -87,11 +87,11 @@ class PlayerTest {
         shipPositions.add(new ArrayList<>(List.of(0,2)));
         shipPositions.add(new ArrayList<>(List.of(0,3)));
         shipPositions.add(new ArrayList<>(List.of(0,4)));
-        Battleground battlegroundP1 = new Battleground(
+        Battleground battlegroundP1 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
-        Battleground battlegroundP2 = new Battleground(
+        Battleground battlegroundP2 = new BattlegroundImpl(
                 battlegroundSize,
                 numOfShips,
                 shipPositions);
