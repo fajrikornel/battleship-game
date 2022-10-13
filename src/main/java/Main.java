@@ -1,4 +1,8 @@
-import battleship.*;
+import battleship.client.CLIClient;
+import battleship.client.Client;
+import battleship.state.Context;
+import battleship.state.ContextFactory;
+import battleship.state.ContextFactoryImpl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -8,7 +12,6 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) {
 
-        //TODO refactor to make it cleaner
         int battlegroundSize = Integer.parseInt(args[0]);
         int numOfShips = Integer.parseInt(args[1]);
         int numOfMissiles = Integer.parseInt(args[2]);
