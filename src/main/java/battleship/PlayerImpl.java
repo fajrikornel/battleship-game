@@ -12,7 +12,7 @@ public class PlayerImpl implements Player {
         this.numOfMissilesAvailable = numOfMissiles;
         this.numOfMissilesFired = 0;
 
-        PlayerPropertyValidator propertyValidator = new PlayerPropertyValidator(this.numOfMissilesAvailable);
+        PlayerPropertyValidator propertyValidator = new PlayerPropertyValidatorImpl(this.numOfMissilesAvailable);
         propertyValidator.validatePlayerProperties();
     }
 

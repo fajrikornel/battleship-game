@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlayerPropertyValidatorTest {
+class PlayerPropertyValidatorImplTest {
 
     @Test
     public void givenNumOfMissilesOutOfDefinedRangeThrowError() {
@@ -12,11 +12,11 @@ class PlayerPropertyValidatorTest {
         int numOfMissilesLowerBoundTest = 0;
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
-                new PlayerPropertyValidator(numOfMissilesUpperBoundTest)
+                new PlayerPropertyValidatorImpl(numOfMissilesUpperBoundTest)
                         .validatePlayerProperties()
         );
         Exception exceptionLowerBound = assertThrows(IllegalArgumentException.class, () ->
-                new PlayerPropertyValidator(numOfMissilesLowerBoundTest)
+                new PlayerPropertyValidatorImpl(numOfMissilesLowerBoundTest)
                         .validatePlayerProperties()
         );
 

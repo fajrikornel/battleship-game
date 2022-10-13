@@ -18,6 +18,7 @@ class CLIClientTest {
         int battlegroundSize = 3;
         int numOfShips = 2;
         int numOfMissiles = 2;
+
         Set<List<Integer>> P1ShipPositions = new HashSet<>();
         P1ShipPositions.add(new ArrayList<>(List.of(0,1)));
         P1ShipPositions.add(new ArrayList<>(List.of(0,2)));
@@ -25,12 +26,15 @@ class CLIClientTest {
         P2ShipPositions.add(new ArrayList<>(List.of(1,0)));
         P2ShipPositions.add(new ArrayList<>(List.of(2,0)));
 
+        List<Set<List<Integer>>> shipPositionsAllPlayers = new ArrayList<>();
+        shipPositionsAllPlayers.add(P1ShipPositions);
+        shipPositionsAllPlayers.add(P2ShipPositions);
+
         ContextFactory contextFactory = new ContextFactoryImpl(
                 battlegroundSize,
                 numOfShips,
                 numOfMissiles,
-                P1ShipPositions,
-                P2ShipPositions
+                shipPositionsAllPlayers
         );
 
         Context context = contextFactory.getContextOrCreateContextIfNotCreated();

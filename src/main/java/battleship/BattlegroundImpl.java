@@ -20,7 +20,7 @@ public class BattlegroundImpl implements Battleground {
         this.numOfShips = numOfShips;
         this.shipPositions = shipPositions;
 
-        BattlegroundPropertyValidator propertyValidator = new BattlegroundPropertyValidator(
+        BattlegroundPropertyValidator propertyValidator = new BattlegroundPropertyValidatorImpl(
                 this.battlegroundSize,
                 this.numOfShips,
                 this.shipPositions);

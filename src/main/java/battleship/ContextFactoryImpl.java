@@ -7,18 +7,18 @@ public class ContextFactoryImpl implements ContextFactory {
     private int battlegroundSize;
     private int numOfShips;
     private int numOfMissiles;
-    private List<Set<List<Integer>>> shipPositionsList = new ArrayList<>();
+    private List<Set<List<Integer>>> shipPositionsList;
 
     public ContextFactoryImpl(
             int battlegroundSize,
             int numOfShips,
             int numOfMissiles,
-            Set<List<Integer>>... shipPositionsList
+            List<Set<List<Integer>>> shipPositionsAllPlayers
     ) {
         this.battlegroundSize = battlegroundSize;
         this.numOfShips = numOfShips;
         this.numOfMissiles = numOfMissiles;
-        this.shipPositionsList.addAll(Arrays.asList(shipPositionsList));
+        this.shipPositionsList = shipPositionsAllPlayers;
     }
 
     public Context getContextOrCreateContextIfNotCreated() {

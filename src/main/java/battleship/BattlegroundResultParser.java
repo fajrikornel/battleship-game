@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//TODO this should be a class with static methods. Used by context/battleground
 public class BattlegroundResultParser {
     private static Set<List<Integer>> shipPositions = new HashSet<>();
     private static Set<List<Integer>> destroyedShipPositions = new HashSet<>();

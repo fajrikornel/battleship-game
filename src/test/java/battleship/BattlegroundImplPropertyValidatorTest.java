@@ -2,7 +2,6 @@ package battleship;
 
 import org.junit.jupiter.api.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BattlegroundImplPropertyValidatorTest {
+class BattlegroundPropertyValidatorImplTest {
     @Test
     public void givenNumOfShipsOutOfDefinedRangeThrowError() {
         int battlegroundSize = 9; //Arbitrary number
@@ -20,11 +19,11 @@ class BattlegroundImplPropertyValidatorTest {
         Set<List<Integer>> P1ShipPositionsLower = generateMockShipPositions(battlegroundSize, numOfShipsLowerBoundTest);
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfShipsUpperBoundTest, P1ShipPositionsUpper)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfShipsUpperBoundTest, P1ShipPositionsUpper)
                         .validateBattlegroundProperties()
         );
         Exception exceptionLowerBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfShipsLowerBoundTest, P1ShipPositionsLower)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfShipsLowerBoundTest, P1ShipPositionsLower)
                         .validateBattlegroundProperties()
         );
 
@@ -44,11 +43,11 @@ class BattlegroundImplPropertyValidatorTest {
         Set<List<Integer>> shipPositionsLowerBoundTest = generateMockShipPositions(battlegroundSizeLowerBoundTest, numOfShips);
 
         Exception exceptionUpperBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSizeUpperBoundTest, numOfShips, shipPositionsUpperBoundTest)
+                new BattlegroundPropertyValidatorImpl(battlegroundSizeUpperBoundTest, numOfShips, shipPositionsUpperBoundTest)
                         .validateBattlegroundProperties()
         );
         Exception exceptionLowerBound = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSizeLowerBoundTest, numOfShips, shipPositionsLowerBoundTest)
+                new BattlegroundPropertyValidatorImpl(battlegroundSizeLowerBoundTest, numOfShips, shipPositionsLowerBoundTest)
                         .validateBattlegroundProperties()
         );
 
@@ -69,11 +68,11 @@ class BattlegroundImplPropertyValidatorTest {
         Set<List<Integer>> P2ShipPositionsWrong = generateMockShipPositions(battlegroundSize, numOfP2ShipsWrong);
 
         Exception exceptionNumOfShipsMore = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfP1AndP2ShipsCorrect, P1ShipPositionsWrong)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfP1AndP2ShipsCorrect, P1ShipPositionsWrong)
                         .validateBattlegroundProperties()
         );
         Exception exceptionNumOfShipsLess = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfP1AndP2ShipsCorrect, P2ShipPositionsWrong)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfP1AndP2ShipsCorrect, P2ShipPositionsWrong)
                         .validateBattlegroundProperties()
         );
 
@@ -96,11 +95,11 @@ class BattlegroundImplPropertyValidatorTest {
         P2ShipPositionsWrong.add(wrongPosition2);
 
         Exception exceptionCoordinateLessThanZero = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfShips, P2ShipPositionsWrong)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfShips, P2ShipPositionsWrong)
                         .validateBattlegroundProperties()
         );
         Exception exceptionCoordinateMoreThanBattleground = assertThrows(IllegalArgumentException.class, () ->
-                new BattlegroundPropertyValidator(battlegroundSize, numOfShips, P1ShipPositionsWrong)
+                new BattlegroundPropertyValidatorImpl(battlegroundSize, numOfShips, P1ShipPositionsWrong)
                         .validateBattlegroundProperties()
         );
 
