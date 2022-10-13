@@ -9,6 +9,7 @@ public class Turn implements State {
     private Player currentPlayer;
     private Player targetPlayer;
     private Context context;
+    private String stateString;
 
     public Turn(int currentPlayerIndex, Context context) {
         this.currentPlayerIndex = currentPlayerIndex;
@@ -16,6 +17,7 @@ public class Turn implements State {
         this.playerList = context.getAllPlayers();
         this.currentPlayer = playerList.get(currentPlayerIndex);
         this.targetPlayer = playerList.get(getTargetPlayerIndex());
+        this.stateString = "P" + (currentPlayerIndex + 1) + "'S TURN";
 
         if (isCurrentPlayerOutOfMissiles()) {
             switchState();
@@ -63,5 +65,8 @@ public class Turn implements State {
 
     public Map<Player, PlayerReport> getPlayerReports() {
         throw new IllegalStateException("Turn state does not have getPlayerReports() method");
+    }
+    public String getStateString() {
+        return stateString;
     }
 }

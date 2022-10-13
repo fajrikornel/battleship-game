@@ -45,10 +45,12 @@ public class ContextImpl implements Context {
     }
 
     public List<String> getBattlegroundResults() {
+        List<String> battlegroundResults = new ArrayList<>();
         for (Player player: allPlayers) {
             Battleground battleground = player.getBattleground();
-            
+            String battlegroundResult = BattlegroundResultParser.getBattlegroundReport(battleground);
+            battlegroundResults.add(battlegroundResult);
         }
-        return null;
+        return battlegroundResults;
     }
 }

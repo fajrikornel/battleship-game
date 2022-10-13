@@ -52,21 +52,21 @@ class CLIClientTest {
         client.execute();
 
         String actualOutputState = client.getStateString();
-        String correctOutputState = "GAME OVER";
+        String correctOutputState = "GAME OVER. WINNER: P1";
 
         List<String> actualBattlegroundResults = client.getBattlegroundResultsString();
         List<String> correctBattlegroundResults = new ArrayList<String>(List.of(
                 String.join("\n",
-                        "O _ B ",
-                        "B _ _ ",
-                        "X _ O "),
+                        "_ B B ",
+                        "O _ _ ",
+                        "O _ _ "),
                 String.join("\n",
-                        "O _ B ",
-                        "B _ _ ",
-                        "X _ O ")
+                        "_ _ _ ",
+                        "X _ _ ",
+                        "X _ _ ")
         ));
 
-        assertEquals(actualOutputState, correctOutputState);
-        assertEquals(actualBattlegroundResults, correctBattlegroundResults);
+        assertEquals(correctOutputState, actualOutputState);
+        assertEquals(correctBattlegroundResults, actualBattlegroundResults);
     }
 }
