@@ -86,8 +86,7 @@ class ContextImplTest {
         int battlegroundSize = 5;
         int numOfShips = 2;
         int numOfMissiles = 2;
-        Set<List<Integer>> shipPositions = //{{0,0}, {0,1}}
-                generateMockShipPositions(battlegroundSize, numOfShips);
+        Set<List<Integer>> shipPositions = generateMockShipPositions(battlegroundSize, numOfShips);
 
         Player P1 = new PlayerImpl(numOfMissiles);
         Battleground battlegroundP1 = new BattlegroundImpl(

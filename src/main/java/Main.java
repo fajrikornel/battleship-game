@@ -32,7 +32,7 @@ public class Main {
 
     private static List<Set<List<Integer>>> parseShipPositionsAllPlayers(String[] args) {
         List<Set<List<Integer>>> shipPositionsAllPlayers = new ArrayList<>();
-        for (int j = 3; j < args.length; j++) { //for each player
+        for (int j = 3; j < args.length; j++) {
             String shipPositionsUnparsed = args[j];
             Set<List<Integer>> shipPositions = parseShipPositionsString(shipPositionsUnparsed);
             shipPositionsAllPlayers.add(shipPositions);
@@ -41,9 +41,9 @@ public class Main {
     }
 
     private static Set<List<Integer>> parseShipPositionsString(String shipPositionsString) {
-        String[] shipPositionsArray = shipPositionsString.split(":"); // {"0,1","0,2"}
+        String[] shipPositionsArray = shipPositionsString.split(":");
         Set<List<Integer>> shipPositions = new HashSet<>();
-        for (String coordinateString : shipPositionsArray) { //for each ship
+        for (String coordinateString : shipPositionsArray) {
             int xCoordinate = Integer.parseInt(coordinateString.substring(0, 1));
             int yCoordinate = Integer.parseInt(coordinateString.substring(2, 3));
             shipPositions.add(new ArrayList<>(List.of(xCoordinate, yCoordinate)));

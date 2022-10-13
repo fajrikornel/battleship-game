@@ -40,17 +40,17 @@ public class BattlegroundResultParser {
         return result.toString();
     }
 
-    private static boolean isCoordinateOfDestroyedShip(List<Integer> coordinate) { //X
+    private static boolean isCoordinateOfDestroyedShip(List<Integer> coordinate) {
         return destroyedShipPositions.contains(coordinate);
     }
 
-    private static boolean isCoordinateOfIntactShip(List<Integer> coordinate) { //B
+    private static boolean isCoordinateOfIntactShip(List<Integer> coordinate) {
         return shipPositions.contains(coordinate) &&
                 !isCoordinateOfDestroyedShip(coordinate) &&
                 !isCoordinateOfFailedMissileAttack(coordinate);
     }
 
-    private static boolean isCoordinateOfFailedMissileAttack(List<Integer> coordinate) { //O
+    private static boolean isCoordinateOfFailedMissileAttack(List<Integer> coordinate) {
         return failedMissileAttackPositions.contains(coordinate);
     }
 
