@@ -10,4 +10,6 @@ public interface Context {
     Player getCurrentPlayer();
     void attack(List<Integer> coordinate);
     Map<Player, PlayerReport> getPlayerReports();
+    String getStateString();
+    List<String> getBattlegroundResults();
 }

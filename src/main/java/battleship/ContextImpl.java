@@ -39,4 +39,16 @@ public class ContextImpl implements Context {
     public Map<Player, PlayerReport> getPlayerReports() {
         return state.getPlayerReports();
     }
+
+    public String getStateString() {
+        return state.getStateString();
+    }
+
+    public List<String> getBattlegroundResults() {
+        for (Player player: allPlayers) {
+            Battleground battleground = player.getBattleground();
+            
+        }
+        return null;
+    }
 }
