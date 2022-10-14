@@ -44,7 +44,9 @@ public class BattlegroundImpl implements Battleground {
     }
 
     public int getNumOfIntactShips() {
-        return failedAttacks.size();
+        Set<List<Integer>> intactShipPositions = new HashSet<>(shipPositions);
+        intactShipPositions.removeAll(successfulAttacks);
+        return intactShipPositions.size();
     }
 
     public Set<List<Integer>> getShipPositions() {
